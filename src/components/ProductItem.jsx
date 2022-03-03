@@ -1,19 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '../styles/ProductItem.scss';
+import AppContext from '@context/AppContext';
+import addToCartImage from "@icons/bt_add_to_cart.png";
 
-import addToCart from "@icons/bt_add_to_cart.png";
+const ProductItem = ({product}) => {
+	const { addToCart } = useContext(AppContext);
 
-const ProductItem = () => {
+	const handleCart = item => {
+		addToCart(item);
+	}
+
 	return (
 		<div className="ProductItem">
-			<img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" />
+			<img src={`data:image/jpeg;base64,${product.image}`} alt={product.name} />
 			<div className="product-info">
 				<div>
-					<p>$120,00</p>
-					<p>Bike</p>
+					<p>${product.price}</p>
+					<p>{product.name}</p>
 				</div>
-				<figure>
-					<img src={addToCart} alt="" />
+				<figure onClick={() => handleCart(product)} >
+					<img src={addToCartImage} alt="" />
 				</figure>
 			</div>
 		</div>

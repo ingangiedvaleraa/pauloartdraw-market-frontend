@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const listAllProductsAPI = "https://pauloartdraw-market.herokuapp.com/pauloartdraw-market/api/products/all";
 
-const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmNvIiwiaWF0IjoxNjQ2Mjc2NDM1LCJleHAiOjE2NDYzMTI0MzV9.FvZpv0W9uaItnmj1D9_EyuRLVXCfvuiprGfxqxP6B90";
+const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmNvIiwiaWF0IjoxNjQ2NTkxMzE1LCJleHAiOjE2NDY2MjczMTV9.IleDkTaVsvmWd0qchHQk64z4c8IHC7OxPhBef9ddoOY";
 
 const useGetProducts = () => {
     const [products, setProducts] = useState([]);

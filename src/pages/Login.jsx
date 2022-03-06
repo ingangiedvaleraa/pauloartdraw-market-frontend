@@ -28,11 +28,13 @@ const Login = () => {
 					<button className="primary-button login-button"  onClick={handleSubmit}> 
 						Log in 
 					</button>
-					<a href="/">Forgot my password</a>
+					<a href="/recovery-password">Forgot my password</a>
 				</form>
-				<button className="secondary-button signup-button">
-					Sign up
-				</button>
+				<a href="/signup">
+					<button className="secondary-button signup-button">
+						Sign up
+					</button>
+				</a>
 			</div>
 		</div>
 	);

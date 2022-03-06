@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/SendEmail.scss';
+import '@styles/SendEmail.scss';
 
 import logoYardSale from '@logos/logo_yard_sale.png';
 import email from "@icons/email.png";
@@ -14,7 +14,7 @@ const SendEmail = () => {
 				<div className="email-image">
 					<img src={email} alt="email" />
 				</div>
-				<button className="primary-button login-button">Login</button>
+				<a href="/login" className="a-button"><button className="primary-button login-button">Login</button></a>
 				<p className="resend">
 					<span>Didn't receive the email?</span>
 					<a href="/">Resend</a>

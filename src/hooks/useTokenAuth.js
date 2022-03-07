@@ -3,6 +3,8 @@ import { useState } from 'react';
 
 const useTokenAuth = () => {
 
+  const [rol, setRol] = useState();
+
     const getToken = () => {
         const tokenString = sessionStorage.getItem('token');
         const userToken = JSON.parse(tokenString);
@@ -24,9 +26,11 @@ const useTokenAuth = () => {
         sessionStorage.removeItem('token');
         setToken();
         setLoggedId(false);
+        setRol();
     };
 
     return {
+        setRol,
         setToken: saveToken,
         token,
         loggedIn,

@@ -20,11 +20,11 @@ import useTokenAuth from '@hooks/useTokenAuth';
 
 const App = () => {
 
-  const { setToken, loggedIn } = useTokenAuth();
+  const { setToken, loggedIn, setRol } = useTokenAuth();
   const initialState = useInitialState();
   
   if(!loggedIn) {
-    return <Login setToken={setToken} />;
+    return <Login setToken={setToken} setRol={setRol} />;
   }
 
   return (
@@ -33,7 +33,8 @@ const App = () => {
         <Layout>
           <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/login" element={<Login setToken={setToken} setRol={setRol} />} />
+            <Route exact path="/admin-login" element={<Login setToken={setToken} setRol={setRol} />} />
             <Route exact path="/send-email" element={<SendEmail />} />
             <Route
               exact

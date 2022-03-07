@@ -6,6 +6,7 @@ const loginAPI =
 const useLogin = (credentials) => {
   const [tokenLogin, setTokenLogin] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [rol, setRol] = useState();
 
     useEffect(async () => {
         if(credentials != null) {
@@ -19,14 +20,15 @@ const useLogin = (credentials) => {
             })
                 .then(async (res) => await res.json())
                 .then(async (response) => {
-                    switch(response?.jwt) {
+                    switch(response?.token) {
                         case `Email not found: ${credentials.email}`:
                             //console.log(isLoading);
                             //console.log("error");
                             break;
                         default:
-                            //console.log("response", response.jwt);
-                            setTokenLogin(await response.jwt);
+                            console.log("response", response.rol);
+                            setTokenLogin(await response.token);
+                            setRol(await response.rol);
                             //console.log("token state", tokenLogin);
                             break;
                     }
@@ -39,8 +41,9 @@ const useLogin = (credentials) => {
     }, [credentials]);
 
     console.log("token state", tokenLogin);
+    console.log("rol state", rol);
     
-  return { tokenLogin, isLoading };
+  return { tokenLogin, isLoading, rol };
 };
 
 export default useLogin;

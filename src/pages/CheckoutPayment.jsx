@@ -1,13 +1,13 @@
 import React from 'react';
 import OrderItem from '@components/OrderItem';
-import '@styles/Checkout.scss';
+import '@styles/CheckoutPayment.scss';
 
-const Checkout = () => {
+const CheckoutPayment = () => {
   return (
-    <div className="Checkout">
-      <div className="Checkout-container">
+    <div className="CheckoutPayment">
+      <div className="CheckoutPayment-container">
         <h1 className="title">My order</h1>
-        <div className="Checkout-content">
+        <div className="CheckoutPayment-content">
           <div className="order">
             <p>
               <span>03.25.21</span>
@@ -22,4 +22,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default CheckoutPayment;

@@ -3,21 +3,24 @@ import { useState } from 'react';
 
 const useTokenAuth = () => {
 
-  const [rol, setRol] = useState();
-
     const getToken = () => {
         const tokenString = sessionStorage.getItem('token');
+        const rolString = sessionStorage.getItem('rol');
         const userToken = JSON.parse(tokenString);
+        const userRol = JSON.parse(rolString);
         const logged = userToken ? true : false;
-        return {tokenInfo: userToken, loggedInfo: logged};
+        return {tokenInfo: userToken, loggedInfo: logged, rolInfo: userRol};
     };
 
     const [token, setToken] = useState(getToken().tokenInfo);
     const [loggedIn, setLoggedId] = useState(getToken().loggedInfo);
+    const [rol, setRol] = useState(getToken().rolInfo);
 
-    const saveToken = userToken => {
+    const saveToken = (userToken, userRol) => {
         sessionStorage.setItem('token', JSON.stringify(userToken));
+        sessionStorage.setItem('rol', JSON.stringify(userRol));
         setToken(userToken);
+        setRol(userRol);
         setLoggedId(true);
     };
 
@@ -30,7 +33,7 @@ const useTokenAuth = () => {
     };
 
     return {
-        setRol,
+        rol,
         setToken: saveToken,
         token,
         loggedIn,

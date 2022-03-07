@@ -12,6 +12,7 @@ import CreateAccount from '@pages/CreateAccount';
 import Checkout from '@pages/Checkout';
 import CheckoutPayment from '@pages/CheckoutPayment';
 import CheckoutSuccess from '@pages/CheckoutSuccess';
+import Dashboard from '@pages/Dashboard';
 import Orders from '@pages/Orders';
 import AppContext from '@context/AppContext';
 import useInitialState from '@hooks/useInitialState';
@@ -20,11 +21,25 @@ import useTokenAuth from '@hooks/useTokenAuth';
 
 const App = () => {
 
-  const { setToken, loggedIn, setRol } = useTokenAuth();
+  const { setToken, loggedIn, rol } = useTokenAuth();
   const initialState = useInitialState();
   
   if(!loggedIn) {
-    return <Login setToken={setToken} setRol={setRol} />;
+    return (
+      <BrowserRouter>
+      <Routes>
+        <Route exact path='/' element={<Login setToken={setToken} />} />
+        <Route exact path="/signup" element={<CreateAccount />} />
+        <Route
+              exact
+              path="/recovery-password"
+              element={<RecoveryPassword />}
+            />
+        <Route exact path="/send-email" element={<SendEmail />} />
+        <Route path="*" element={<Login setToken={setToken} />} />
+      </Routes>
+    </BrowserRouter>
+    );
   }
 
   return (
@@ -33,20 +48,13 @@ const App = () => {
         <Layout>
           <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route exact path="/login" element={<Login setToken={setToken} setRol={setRol} />} />
-            <Route exact path="/admin-login" element={<Login setToken={setToken} setRol={setRol} />} />
             <Route exact path="/send-email" element={<SendEmail />} />
-            <Route
-              exact
-              path="/recovery-password"
-              element={<RecoveryPassword />}
-            />
             <Route exact path="/new-password" element={<NewPassword />} />
             <Route exact path="/account" element={<MyAccount />} />
-            <Route exact path="/signup" element={<CreateAccount />} />
             <Route exact path="/checkout" element={<Checkout />} />
             <Route exact path="/checkout/payment" element={<CheckoutPayment />} />
             <Route exact path="/checkout/success" element={<CheckoutSuccess />} />
+            { rol == '[ADMIN]' ? <Route exact path="/dashboard" element={<Dashboard />} /> : null }
             <Route exact path="/orders" element={<Orders />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

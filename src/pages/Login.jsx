@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import logoYardSale from '@logos/logo_yard_sale.png';
 
-const Login = ({ setToken, setRol }) => {
+const Login = ({ setToken }) => {
   const [loginData, setLoginData] = useState();
   const [loading, setLoading] = useState(false);
   const result = useLogin(loginData);
@@ -27,9 +27,7 @@ const Login = ({ setToken, setRol }) => {
   };
 
   useEffect(() => {
-    result.tokenLogin ? setToken(result.tokenLogin) : console.log("nada");
-    console.log(result.rolLogin);
-    result.rolLogin ? setRol(result.rolLogin) : console.log("nada2");
+    result.tokenLogin ? setToken(result.tokenLogin, result.rolLogin) : console.log("nada");
   }, [result.tokenLogin, result.rolLogin]);
 
   if (loading) {

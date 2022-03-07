@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '@styles/Footer.scss';
+import useTokenAuth from '@hooks/useTokenAuth';
 
 const Footer = () => {
+    const { rol } = useTokenAuth();
+    useEffect(() => {
+        console.log("rol footer", rol);
+    }, [rol]);
     return (
         <footer className="site-footer">
             <div className="container">
@@ -23,7 +28,7 @@ const Footer = () => {
                     <li><a href="http://scanfcode.com/about/">About Us</a></li>
                     <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
                     <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
-                    <li><a href="/admin-login">Admin</a></li>
+                    { rol == '[ADMIN]' ? <li><a href="/dashboard">Admin</a></li> : null }
                     </ul>
                 </div>
                 </div>

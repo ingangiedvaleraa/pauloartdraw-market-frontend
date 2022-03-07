@@ -26,7 +26,7 @@ const useLogin = (credentials) => {
                             //console.log("error");
                             break;
                         default:
-                            console.log("response", response.rol);
+                            console.log("response", JSON.stringify(response.rol));
                             setTokenLogin(await response.token);
                             setRol(await response.rol);
                             //console.log("token state", tokenLogin);

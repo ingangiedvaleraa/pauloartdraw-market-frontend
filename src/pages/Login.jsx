@@ -28,9 +28,9 @@ const Login = ({ setToken, setRol }) => {
 
   useEffect(() => {
     result.tokenLogin ? setToken(result.tokenLogin) : console.log("nada");
-    console.log(result.rol);
-    result.tokenLogin ? setRol(result.rol) : console.log("nada2");
-  }, [result.tokenLogin]);
+    console.log(result.rolLogin);
+    result.rolLogin ? setRol(result.rolLogin) : console.log("nada2");
+  }, [result.tokenLogin, result.rolLogin]);
 
   if (loading) {
     return <Loading />;

@@ -19,7 +19,7 @@ const { token } = useTokenAuth();
     })
       .then((res) => res.json())
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         setProducts(response);
         setIsLoading(false);
       });

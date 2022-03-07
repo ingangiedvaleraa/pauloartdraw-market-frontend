@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from '@containers/Layout';
 import Login from '@pages/Login';
 import RecoveryPassword from '@pages/RecoveryPassword';
@@ -29,7 +29,7 @@ const App = () => {
       <BrowserRouter>
       <Routes>
         <Route exact path='/' element={<Login setToken={setToken} />} />
-        <Route exact path="/signup" element={<CreateAccount />} />
+        <Route exact path="/signup" element={<CreateAccount setToken={setToken} />} />
         <Route
               exact
               path="/recovery-password"
@@ -49,6 +49,7 @@ const App = () => {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/send-email" element={<SendEmail />} />
+            <Route exact path="/signup" element={<Navigate to="/" />} />
             <Route exact path="/new-password" element={<NewPassword />} />
             <Route exact path="/account" element={<MyAccount />} />
             <Route exact path="/checkout" element={<Checkout />} />

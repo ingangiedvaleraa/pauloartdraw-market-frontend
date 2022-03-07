@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 const useTokenAuth = () => {
@@ -27,6 +27,7 @@ const useTokenAuth = () => {
     const logout = () => {
         console.log("logout");
         sessionStorage.removeItem('token');
+        sessionStorage.removeItem('rol');
         setToken();
         setLoggedId(false);
         setRol();

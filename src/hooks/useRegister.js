@@ -6,16 +6,14 @@ const registerAPI =
   'https://pauloartdraw-market.herokuapp.com/pauloartdraw-market/api/auth/register';
 
 const useRegister = (credentials) => {
-  const [tokenLogin, setTokenLogin] = useState();
   const [loginData, setLoginData] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [rolLogin, setRolLogin] = useState();
-  const { setToken, loggedIn, rol } = useTokenAuth();
+  const { token, setToken, loggedIn, rol } = useTokenAuth();
   const result = useLogin(loginData);
 
     useEffect(async () => {
         if(credentials != null) {
-            await fetch(loginAPI, {
+            await fetch(registerAPI, {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json',
@@ -25,6 +23,7 @@ const useRegister = (credentials) => {
             })
                 .then(async (res) => await res.json())
                 .then(async (response) => {
+                  console.log(response);
                     switch(response) {
                         case `Email not found: ${credentials.email}`:
                           alert(response);
@@ -36,10 +35,8 @@ const useRegister = (credentials) => {
                               email: credentials.email, 
                               password: credentials.password,
                             });
-                            //console.log("token state", tokenLogin);
                             break;
                     }
-                setIsLoading(false);
                 //console.log(response);
                 });
         } else {
@@ -49,13 +46,16 @@ const useRegister = (credentials) => {
     
     
     useEffect(() => {
-    result.tokenLogin ? setToken(result.tokenLogin, result.rolLogin) : console.log("nada");
-  }, [result.tokenLogin, result.rolLogin]);
+    if (result.tokenLogin) {
+      setToken(result.tokenLogin, result.rolLogin)
+      setIsLoading(result.isLoading);
+    }
+    }, [result.tokenLogin, result.rolLogin, result.isLoading]);
 
     //alert("token state", tokenLogin);
     //alert("state"+rolLogin);
     
-  return { tokenLogin, isLoading, rolLogin };
+  return { isLoading, token, rol };
 };
 
 export default useRegister;

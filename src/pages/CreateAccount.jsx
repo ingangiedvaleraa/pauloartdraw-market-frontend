@@ -1,8 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import useRegister from '@hooks/useRegister';
 import '@styles/CreateAccount.scss';
+import Loading from '@components/Loading';
+import PropTypes from 'prop-types';
 
-const CreateAccount = () => {
+const CreateAccount = ({ setToken }) => {
   
   const form = useRef(null);
   
@@ -26,7 +28,17 @@ const CreateAccount = () => {
     }
     setLoading(result.isLoading);
   };
+
+  useEffect(() => {
+    setLoading(result.isLoading);
+    console.log(result.rol);
+    result.token ? setToken(result.token, result.rol) : console.log("nada");
+    
+  }, [result.isLoading, result.token]);
   
+  if (loading) {
+    return <Loading />;
+  } else {
   return (
     <div className="CreateAccount">
       <div className="CreateAccount-container">
@@ -47,7 +59,7 @@ const CreateAccount = () => {
             </label>
             <input
               type="text"
-              name="firsrname"
+              name="firstname"
               placeholder="Teff"
               className="input input-name"
             />
@@ -89,6 +101,12 @@ const CreateAccount = () => {
       </div>
     </div>
   );
+  }
+  
 };
+
+CreateAccount.propTypes = {
+  setToken: PropTypes.func.isRequired
+}
 
 export default CreateAccount;

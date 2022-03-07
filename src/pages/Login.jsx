@@ -27,8 +27,9 @@ const Login = ({ setToken }) => {
   };
 
   useEffect(() => {
+    setLoading(result.isLoading);
     result.tokenLogin ? setToken(result.tokenLogin, result.rolLogin) : console.log("nada");
-  }, [result.tokenLogin, result.rolLogin]);
+  }, [result.tokenLogin, result.rolLogin, result.isLoading]);
 
   if (loading) {
     return <Loading />;

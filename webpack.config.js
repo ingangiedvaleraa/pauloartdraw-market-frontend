@@ -18,6 +18,7 @@ module.exports = {
       '@containers': path.resolve(__dirname, 'src/containers/'),
       '@dashboard': path.resolve(__dirname, 'src/dashboard/'),
       '@partials': path.resolve(__dirname, 'src/dashboard/partials/'),
+      '@content': path.resolve(__dirname, 'src/dashboard/content/'),
       '@context': path.resolve(__dirname, 'src/context/'),
       '@hooks': path.resolve(__dirname, 'src/hooks/'),
       '@pages': path.resolve(__dirname, 'src/pages/'),

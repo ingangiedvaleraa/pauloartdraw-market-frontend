@@ -12,7 +12,7 @@ import CreateAccount from '@pages/CreateAccount';
 import Checkout from '@pages/Checkout';
 import CheckoutPayment from '@pages/CheckoutPayment';
 import CheckoutSuccess from '@pages/CheckoutSuccess';
-import Dashboard from '@pages/Dashboard';
+import Dashboard from '@dashboard/Dashboard';
 import Orders from '@pages/Orders';
 import AppContext from '@context/AppContext';
 import useInitialState from '@hooks/useInitialState';
@@ -41,6 +41,16 @@ const App = () => {
     </BrowserRouter>
     );
   }
+  
+  if(rol == '[ADMIN]') {
+      return(
+        <BrowserRouter>
+         <Routes>
+          <Route exact path="/" element={<Dashboard />} /> 
+         </Routes>
+      </BrowserRouter>
+        );
+  }
 
   return (
     <AppContext.Provider value={initialState}>
@@ -55,7 +65,6 @@ const App = () => {
             <Route exact path="/checkout" element={<Checkout />} />
             <Route exact path="/checkout/payment" element={<CheckoutPayment />} />
             <Route exact path="/checkout/success" element={<CheckoutSuccess />} />
-            { rol == '[ADMIN]' ? <Route exact path="/dashboard" element={<Dashboard />} /> : null }
             <Route exact path="/orders" element={<Orders />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

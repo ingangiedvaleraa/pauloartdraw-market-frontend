@@ -3,7 +3,7 @@
 nav {
     display: flex;
     justify-content: space-between;
-    padding: 0 24px;
+    padding: 0 30px;
     border-bottom: 1px solid var(--very-light-pink);
   }
   nav img {
@@ -16,7 +16,7 @@ nav {
   }
   .nav-logo {
     height: 100%;
-    width: 15%;
+    width: 10%;
     cursor: pointer;
   }
   .navbar-left ul,
@@ -26,7 +26,7 @@ nav {
     margin-top: 6;
     display: flex;
     align-items: center;
-    height: 60%;
+    height: 100%;
   }
   .navbar-left {
     display: flex;

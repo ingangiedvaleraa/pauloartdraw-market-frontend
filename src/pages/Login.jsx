@@ -28,7 +28,9 @@ const Login = ({ setToken }) => {
 
   useEffect(() => {
     setLoading(result.isLoading);
-    result.tokenLogin ? setToken(result.tokenLogin, result.rolLogin) : console.log("nada");
+    result.tokenLogin
+      ? setToken(result.tokenLogin, result.rolLogin)
+      : console.log('nada');
   }, [result.tokenLogin, result.rolLogin, result.isLoading]);
 
   if (loading) {
@@ -72,11 +74,10 @@ const Login = ({ setToken }) => {
       </div>
     );
   }
-  
 };
 
 Login.propTypes = {
-  setToken: PropTypes.func.isRequired
-}
+  setToken: PropTypes.func.isRequired,
+};
 
 export default Login;

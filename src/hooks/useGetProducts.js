@@ -5,7 +5,7 @@ const listAllProductsAPI =
   'https://pauloartdraw-market.herokuapp.com/pauloartdraw-market/api/products/all';
 
 const useGetProducts = () => {
-const { token } = useTokenAuth();
+  const { token } = useTokenAuth();
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {

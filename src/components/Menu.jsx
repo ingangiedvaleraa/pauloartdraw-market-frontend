@@ -3,7 +3,7 @@ import '@styles/Menu.scss';
 import useTokenAuth from '@hooks/useTokenAuth';
 
 const Menu = () => {
-const { logout } = useTokenAuth();
+  const { logout } = useTokenAuth();
 
   return (
     <div className="Menu">
@@ -17,7 +17,9 @@ const { logout } = useTokenAuth();
           <a href="/account">My account</a>
         </li>
         <li>
-          <a className='logout' href="/" onClick={() => logout()}>Sign out</a>
+          <a className="logout" href="/" onClick={() => logout()}>
+            Sign out
+          </a>
         </li>
       </ul>
     </div>

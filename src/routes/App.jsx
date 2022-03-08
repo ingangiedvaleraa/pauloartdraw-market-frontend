@@ -20,36 +20,39 @@ import '@styles/global.css';
 import useTokenAuth from '@hooks/useTokenAuth';
 
 const App = () => {
-
   const { setToken, loggedIn, rol } = useTokenAuth();
   const initialState = useInitialState();
-  
-  if(!loggedIn) {
+
+  if (!loggedIn) {
     return (
       <BrowserRouter>
-      <Routes>
-        <Route exact path='/' element={<Login setToken={setToken} />} />
-        <Route exact path="/signup" element={<CreateAccount setToken={setToken} />} />
-        <Route
-              exact
-              path="/recovery-password"
-              element={<RecoveryPassword />}
-            />
-        <Route exact path="/send-email" element={<SendEmail />} />
-        <Route path="*" element={<Login setToken={setToken} />} />
-      </Routes>
-    </BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<Login setToken={setToken} />} />
+          <Route
+            exact
+            path="/signup"
+            element={<CreateAccount setToken={setToken} />}
+          />
+          <Route
+            exact
+            path="/recovery-password"
+            element={<RecoveryPassword />}
+          />
+          <Route exact path="/send-email" element={<SendEmail />} />
+          <Route path="*" element={<Login setToken={setToken} />} />
+        </Routes>
+      </BrowserRouter>
     );
   }
-  
-  if(rol == '[ADMIN]') {
-      return(
-        <BrowserRouter>
-         <Routes>
-          <Route exact path="/" element={<Dashboard />} /> 
-         </Routes>
+
+  if (rol == '[ADMIN]') {
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<Dashboard />} />
+        </Routes>
       </BrowserRouter>
-        );
+    );
   }
 
   return (
@@ -63,8 +66,16 @@ const App = () => {
             <Route exact path="/new-password" element={<NewPassword />} />
             <Route exact path="/account" element={<MyAccount />} />
             <Route exact path="/checkout" element={<Checkout />} />
-            <Route exact path="/checkout/payment" element={<CheckoutPayment />} />
-            <Route exact path="/checkout/success" element={<CheckoutSuccess />} />
+            <Route
+              exact
+              path="/checkout/payment"
+              element={<CheckoutPayment />}
+            />
+            <Route
+              exact
+              path="/checkout/success"
+              element={<CheckoutSuccess />}
+            />
             <Route exact path="/orders" element={<Orders />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

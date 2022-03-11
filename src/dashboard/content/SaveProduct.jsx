@@ -1,8 +1,8 @@
-import React from 'react';
-import useGetProducts from '@hooks/useGetProducts';
+import React, { useContext } from 'react';
+import AppContext from '@context/AppContext';
 
 const SaveProduct = () => {
-  const { isLoading, isEditProduct, selectedProduct } = useGetProducts();
+  const { productsState } = useContext(AppContext);
     return (
         <div>
       <div className="panel-header panel-header-sm"></div>
@@ -11,7 +11,7 @@ const SaveProduct = () => {
           <div className="col-md-8">
             <div className="card">
                 <div className="card-header">
-                <h5 className="title">{isEditProduct ? `Editar Producto` : `Nuevo Producto`}</h5>
+                <h5 className="title">{productsState.isEditProduct ? `Editar Producto` : `Nuevo Producto`}</h5>
                 </div>
                 <div className="card-body">
                 <form>

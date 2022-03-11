@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import useGetProducts from '@hooks/useGetProducts';
 import Loading from '@components/Loading';
+import AppContext from '@context/AppContext';
 
 const ProductsList = () => {
-  const { products, isLoading, editProduct } = useGetProducts();
-  if (isLoading) {
+  const { productsState } = useContext(AppContext);
+  if (result.isLoading) {
     return <Loading />;
   } else {
   return (
@@ -27,14 +28,14 @@ const ProductsList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                {products.map((product) => (
+                {productsState.products.map((product) => (
                   <tr key={product.id}>
                     <td><img src={`data:image/jpeg;base64,${product.image}`} alt={product.name} /></td>
                     <td>{product.name}</td>
                     <td className="text-right">${product.price}</td>
                     <td className="td-actions text-right">
                           <Link to="/edit-product">
-                            <button type="button" rel="tooltip" title="" className="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Product" onClick={() => editProduct(product)}>
+                            <button type="button" rel="tooltip" title="" className="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Product" onClick={() => productsState.editProduct(product)}>
                               <i className="now-ui-icons ui-2_settings-90"></i>
                             </button>
                           </Link>

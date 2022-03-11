@@ -8,7 +8,7 @@ const useGetProducts = () => {
   const { token } = useTokenAuth();
   const [ products, setProducts ] = useState([]);
   const [ selectedProduct, setSelectedProduct ] = useState();
-  const [ isEditProduct, setIsEditProduct ] = useState(false);
+  const [ isEditProduct, setIsEditProduct ] = useState();
   const [ isLoading, setIsLoading ] = useState(true);
   useEffect(() => {
     fetch(listAllProductsAPI, {
@@ -28,9 +28,9 @@ const useGetProducts = () => {
   }, []);
 
   const editProduct = (payload) => {
-    setSelectedProduct(payload);
     setIsEditProduct(true);
-    console.log(isEditProduct);
+    setSelectedProduct(payload);
+    alert(isEditProduct);
   };
   
   const newProduct = () => {

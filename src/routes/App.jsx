@@ -13,6 +13,8 @@ import Checkout from '@pages/Checkout';
 import CheckoutPayment from '@pages/CheckoutPayment';
 import CheckoutSuccess from '@pages/CheckoutSuccess';
 import Dashboard from '@dashboard/Dashboard';
+import DashboardHome from '@dashboard/DashboardHome';
+import SaveProduct from '@content/SaveProduct';
 import Orders from '@pages/Orders';
 import AppContext from '@context/AppContext';
 import useInitialState from '@hooks/useInitialState';
@@ -48,9 +50,12 @@ const App = () => {
   if (rol == '[ADMIN]') {
     return (
       <BrowserRouter>
-        <Routes>
-          <Route exact path="/" element={<Dashboard />} />
-        </Routes>
+        <Dashboard>
+          <Routes>
+            <Route exact path="/" element={<DashboardHome />} />
+            <Route exact path="/edit-product" element={<SaveProduct />} />
+          </Routes>
+        </Dashboard>
       </BrowserRouter>
     );
   }

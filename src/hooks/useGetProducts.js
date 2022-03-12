@@ -54,6 +54,7 @@ const useGetProducts = () => {
     await fetch(createNewProductAPI, {
       method: 'POST',
       headers: {
+        Authorization: 'Bearer ' + token,
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
       },
@@ -61,6 +62,7 @@ const useGetProducts = () => {
     })
       .then(async (res) => await res.json())
       .then(async (response) => {
+        await getAllProducts();
         setIsLoading(false);
         console.log(response);
       });

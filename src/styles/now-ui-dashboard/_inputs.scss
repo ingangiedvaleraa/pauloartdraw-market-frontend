@@ -338,21 +338,20 @@ textarea.form-control{
     padding: 0 12px;
 }
 
-// Input files - hide actual input - requires specific markup in the sample.
-.form-group input[type=file] {
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 100;
-  background:#fff;
-  box-shadow: -3px -3px 7px rgba(94, 104, 121, 0.377),
-              3px 3px 7px rgba(94, 104, 121, 0.377);
-}
+.form-label-file {
+    display:block;
+    width:45%;
+    margin-left: 25%;
+    line-height:50px;
+    text-align:center;
+    background:#fd7e14;
+    color:#ffff;
+    font-size:15px;
+    text-transform:Uppercase;
+    font-weight:600;
+    border-radius:5px;
+    cursor:pointer;
+  }
 
 .switch {
     position: relative;
@@ -394,11 +393,11 @@ textarea.form-control{
   }
   
   input:checked + .slider {
-    background-color: #2196F3;
+    background-color: #fd7e14;
   }
   
   input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px #fd7e14;
   }
   
   input:checked + .slider:before {
@@ -416,21 +415,36 @@ textarea.form-control{
     border-radius: 50%;
   }
 
-.form-label-file {
-    display:block;
-    width:45%;
-    height:45px;
-    margin-left: 25%;
-    line-height:50px;
-    text-align:center;
-    background:#1172c2;
-    color:#ffff;
-    font-size:15px;
-    text-transform:Uppercase;
-    font-weight:600;
-    border-radius:5px;
-    cursor:pointer;
-  }
+  .select-box {
+    margin:5px auto 40px auto;	
+    border:1px solid #d9d9d9;
+    height:30px;
+    overflow: hidden;
+    width: 230px;
+    position:relative;
+ }
+ select {
+    background: transparent;
+    border: none;
+    height: 30px;
+    padding: 5px;
+    width: 220px;
+ }
+ select:focus{ outline: none;}
+ 
+ .select-box::after{
+     content:"\025be";
+     display:table-cell;
+     padding-top:7px;
+     text-align:center;
+     width:30px;
+     height:30px;
+     background-color:#fd7e14;
+     position:absolute;
+     top:0;
+     right:0px;	
+     pointer-events: none;
+ }
 
 .form-text {
     font-size: $font-size-small;

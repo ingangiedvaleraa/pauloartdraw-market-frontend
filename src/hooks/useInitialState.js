@@ -9,7 +9,11 @@ const initialState = {
 const useInitialState = () => {
   const productsState = useGetProducts();
   const categoriesState = useCategories();
-  const [state, setState] = useState({ initialState, productsState, categoriesState });
+  const [state, setState] = useState({
+    initialState,
+    productsState,
+    categoriesState,
+  });
   //console.log(state);
 
   useEffect(() => {
@@ -23,15 +27,12 @@ const useInitialState = () => {
 
   useEffect(() => {
     updateCategoriesState(categoriesState);
-  }, [
-    categoriesState.isLoading,
-    categoriesState.categories,
-  ]);
+  }, [categoriesState.isLoading, categoriesState.categories]);
 
   const updateCategoriesState = (payload) => {
     setState({
       ...state,
-      categoriesState: payload
+      categoriesState: payload,
     });
   };
 

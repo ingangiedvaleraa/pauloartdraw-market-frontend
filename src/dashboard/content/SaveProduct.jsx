@@ -43,18 +43,26 @@ const SaveProduct = () => {
                           type="text"
                           className="form-control"
                           name="name"
-                          defaultValue="Producto 1"
+                          defaultValue={state.productsState.selectedProduct
+                            ? state.productsState.selectedProduct.name
+                            : "Producto 1"}
                         />
                       </div>
                     </div>
                     <div className="col-md-4 px-1">
-                        <label htmlFor='category'>Categoría</label>
+                      <label htmlFor="category">Categoría</label>
                       <div className="form-group">
-                        <select name='category'>
-                        {state.categoriesState.categories.map((category) => (
-                            <option value={category.id} key={category.id}>{category.name}</option>
-                        ))}
-                        </select>
+                        <div className="select-box">
+                          <select name="category">
+                            {state.categoriesState.categories.map(
+                              (category) => (
+                                <option value={category.id} key={category.id}>
+                                  {category.name}
+                                </option>
+                              )
+                            )}
+                          </select>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -66,7 +74,9 @@ const SaveProduct = () => {
                           type="number"
                           className="form-control"
                           name="stock"
-                          defaultValue="1"
+                          defaultValue={state.productsState.selectedProduct
+                            ? state.productsState.selectedProduct.stock
+                            : 1}
                         />
                       </div>
                     </div>
@@ -77,6 +87,9 @@ const SaveProduct = () => {
                           type="text"
                           className="form-control"
                           name="price"
+                          defaultValue={state.productsState.selectedProduct
+                            ? state.productsState.selectedProduct.price
+                            : 0}
                         />
                       </div>
                     </div>
@@ -93,7 +106,7 @@ const SaveProduct = () => {
                   <div className="row">
                     <div className="col-md-12">
                       <div className="form-group">
-                        <label className="form-label-file" htmlFor="image">
+                        <label htmlFor="image">
                           Subir Imagen
                         </label>
                         <input

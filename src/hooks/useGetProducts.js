@@ -6,12 +6,13 @@ const listAllProductsAPI =
 
 const useGetProducts = () => {
   const { token } = useTokenAuth();
-  const [ products, setProducts ] = useState([]);
-  const [ selectedProduct, setSelectedProduct ] = useState();
-  const [ isEditProduct, setIsEditProduct ] = useState();
-  const [ isLoading, setIsLoading ] = useState(true);
-  useEffect(() => {
-    fetch(listAllProductsAPI, {
+  const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState();
+  const [isEditProduct, setIsEditProduct] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(async () => {
+    await fetch(listAllProductsAPI, {
       method: 'GET',
       headers: {
         Authorization: 'Bearer ' + token,
@@ -19,26 +20,35 @@ const useGetProducts = () => {
         'Access-Control-Allow-Origin': '*',
       },
     })
-      .then((res) => res.json())
-      .then((response) => {
-        //console.log(response);
-        setProducts(response);
+      .then(async (res) => await res.json())
+      .then(async (response) => {
+        setProducts(await response);
         setIsLoading(false);
       });
   }, []);
 
   const editProduct = (payload) => {
+    setIsLoading(true);
     setIsEditProduct(true);
     setSelectedProduct(payload);
-    alert(isEditProduct);
-  };
-  
-  const newProduct = () => {
-    setSelectedProduct();
-    setIsEditProduct(false);
+    setIsLoading(false);
   };
 
-  return { products, isLoading, editProduct, newProduct, selectedProduct, isEditProduct };
+  const newProduct = () => {
+    setIsLoading(true);
+    setSelectedProduct();
+    setIsEditProduct(false);
+    setIsLoading(false);
+  };
+
+  return {
+    products,
+    isLoading,
+    editProduct,
+    newProduct,
+    selectedProduct,
+    isEditProduct,
+  };
 };
 
 export default useGetProducts;

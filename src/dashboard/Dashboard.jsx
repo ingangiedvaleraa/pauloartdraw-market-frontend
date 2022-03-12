@@ -6,7 +6,7 @@ import UsersList from '@content/UsersList';
 import ProductsList from '@content/ProductsList';
 import '@styles/now-ui-dashboard.scss';
 
-const Dashboard = ({children}) => {
+const Dashboard = ({ children }) => {
   return (
     <div className="wrapper">
       <Sidebar />

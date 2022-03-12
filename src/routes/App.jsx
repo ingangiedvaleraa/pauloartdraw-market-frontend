@@ -49,14 +49,16 @@ const App = () => {
 
   if (rol == '[ADMIN]') {
     return (
-      <BrowserRouter>
-        <Dashboard>
-          <Routes>
-            <Route exact path="/" element={<DashboardHome />} />
-            <Route exact path="/edit-product" element={<SaveProduct />} />
-          </Routes>
-        </Dashboard>
-      </BrowserRouter>
+      <AppContext.Provider value={initialState}>
+        <BrowserRouter>
+          <Dashboard>
+            <Routes>
+              <Route exact path="/" element={<DashboardHome />} />
+              <Route exact path="/edit-product" element={<SaveProduct />} />
+            </Routes>
+          </Dashboard>
+        </BrowserRouter>
+      </AppContext.Provider>
     );
   }
 

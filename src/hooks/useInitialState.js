@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useGetProducts from '@hooks/useGetProducts';
 
 const initialState = {
@@ -6,8 +6,26 @@ const initialState = {
 };
 
 const useInitialState = () => {
-  const [state, setState] = useState(initialState);
   const productsState = useGetProducts();
+  const [state, setState] = useState({ initialState, productsState });
+
+  useEffect(() => {
+    if (!productsState.isLoading) {
+      updateProductsState(productsState);
+    }
+  }, [
+    productsState.isLoading,
+    productsState.products,
+    productsState.isEditProduct,
+    productsState.selectedProduct,
+  ]);
+
+  const updateProductsState = (payload) => {
+    setState({
+      ...initialState,
+      productsState: payload,
+    });
+  };
 
   const addToCart = (payload) => {
     setState({
@@ -27,7 +45,6 @@ const useInitialState = () => {
     state,
     addToCart,
     removeFromCart,
-    productsState,
   };
 };
 

@@ -1,23 +1,56 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import AppContext from '@context/AppContext';
+import Loading from '@components/Loading';
+
 
 const SaveProduct = () => {
   const { state } = useContext(AppContext);
   const form = useRef(null);
   const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
+  const [productData, setProductData] = useState();
+
+  useEffect(() => {
+      setImgData(state.productsState.selectedProduct
+        ? `data:image/jpeg;base64,${state.productsState.selectedProduct.image}`
+        : null);
+      setPicture(state.productsState.selectedProduct
+        ? state.productsState.selectedProduct.image
+        : null);
+  }, [state.productsState.isLoading]);
+
   const onChangePicture = (e) => {
     if (e.target.files[0]) {
-      console.log('picture: ', e.target.files);
+      //console.log('picture: ', e.target.files);
       setPicture(e.target.files[0]);
       const reader = new FileReader();
-      reader.addEventListener('load', () => {
-        setImgData(reader.result);
-      });
       reader.readAsDataURL(e.target.files[0]);
+      reader.onload = () => {
+          setImgData(reader.result);
+      }
     }
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(form.current);
+    const data = {
+      name: formData.get('name'),
+      price: formData.get('price'),
+      categoryId: formData.get('category'),
+      stock: formData.get('stock'),
+      image: imgData ? imgData.substring('data:image/jpeg;base64,'.length) : '',
+      active: formData.get('active') == "on",
+    };
+    if (data.name != '' && data.price != '') {
+        console.log(data);
+        await state.productsState.createProduct(data);
+    }
+  };
+
+  if (state.productsState.isLoading) {
+    return <Loading />;
+  } else {
   return (
     <div>
       <div className="panel-header panel-header-sm"></div>
@@ -97,7 +130,9 @@ const SaveProduct = () => {
                       <label>Estado</label>
                       <div className="form-group">
                         <label className="switch">
-                          <input type="checkbox" name="state" />
+                          <input type="checkbox" name="active" defaultChecked={state.productsState.selectedProduct
+                            ? state.productsState.selectedProduct.active
+                            : false}/>
                           <span className="slider round"></span>
                         </label>
                       </div>
@@ -110,15 +145,21 @@ const SaveProduct = () => {
                           Subir Imagen
                         </label>
                         <input
-                          accept="image/*"
                           type="file"
                           className="form-control"
                           name="image"
                           onChange={onChangePicture}
+                          defaultValue={picture}
                         />
                       </div>
                     </div>
                   </div>
+                  <button
+              className="primary-button login-button"
+              onClick={handleSubmit}
+            >
+              Guardar
+            </button>
                 </form>
               </div>
             </div>
@@ -147,6 +188,7 @@ const SaveProduct = () => {
       </div>
     </div>
   );
+                          }
 };
 
 export default SaveProduct;

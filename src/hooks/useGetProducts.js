@@ -4,6 +4,10 @@ import useTokenAuth from '@hooks/useTokenAuth';
 const listAllProductsAPI =
   'https://pauloartdraw-market.herokuapp.com/pauloartdraw-market/api/products/all';
 
+const createNewProductAPI = 
+  'https://pauloartdraw-market.herokuapp.com/pauloartdraw-market/api/products';
+
+
 const useGetProducts = () => {
   const { token } = useTokenAuth();
   const [products, setProducts] = useState([]);
@@ -12,6 +16,10 @@ const useGetProducts = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(async () => {
+    await getAllProducts();
+  }, []);
+
+  const getAllProducts = async() => {
     await fetch(listAllProductsAPI, {
       method: 'GET',
       headers: {
@@ -25,12 +33,12 @@ const useGetProducts = () => {
         setProducts(await response);
         setIsLoading(false);
       });
-  }, []);
+  };
 
-  const editProduct = (payload) => {
+  const editProduct = async (payload) => {
     setIsLoading(true);
     setIsEditProduct(true);
-    setSelectedProduct(payload);
+    setSelectedProduct(await payload);
     setIsLoading(false);
   };
 
@@ -41,6 +49,23 @@ const useGetProducts = () => {
     setIsLoading(false);
   };
 
+  const createProduct = async (data) => {
+    console.log(data);
+    await fetch(createNewProductAPI, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify(data),
+    })
+      .then(async (res) => await res.json())
+      .then(async (response) => {
+        setIsLoading(false);
+        console.log(response);
+      });
+  }
+
   return {
     products,
     isLoading,
@@ -48,6 +73,7 @@ const useGetProducts = () => {
     newProduct,
     selectedProduct,
     isEditProduct,
+    createProduct,
   };
 };
 

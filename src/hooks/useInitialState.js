@@ -36,8 +36,8 @@ const useInitialState = () => {
     });
   };
 
-  const updateProductsState = (payload) => {
-    setState({
+  const updateProductsState = async (payload) => {
+    await setState({
       ...state,
       productsState: payload,
     });

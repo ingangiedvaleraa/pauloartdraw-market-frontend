@@ -2,8 +2,6 @@ import React from 'react';
 import Sidebar from '@partials/Sidebar';
 import Navbar from '@partials/Navbar';
 import FooterDash from '@partials/FooterDash';
-import UsersList from '@content/UsersList';
-import ProductsList from '@content/ProductsList';
 import '@styles/now-ui-dashboard.scss';
 
 const Dashboard = ({ children }) => {

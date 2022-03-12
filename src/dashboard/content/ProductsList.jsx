@@ -45,8 +45,8 @@ const ProductsList = () => {
                             title=""
                             className="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral"
                             data-original-title="Edit Product"
-                            onClick={() =>
-                              state.productsState.editProduct(product)
+                            onClick={async () =>
+                              await state.productsState.editProduct(product)
                             }
                           >
                             <i className="now-ui-icons ui-2_settings-90"></i>

@@ -4,9 +4,8 @@ import useTokenAuth from '@hooks/useTokenAuth';
 const listAllProductsAPI =
   'https://pauloartdraw-market.herokuapp.com/pauloartdraw-market/api/products/all';
 
-const createNewProductAPI = 
+const createNewProductAPI =
   'https://pauloartdraw-market.herokuapp.com/pauloartdraw-market/api/products';
-
 
 const useGetProducts = () => {
   const { token } = useTokenAuth();
@@ -19,7 +18,7 @@ const useGetProducts = () => {
     await getAllProducts();
   }, []);
 
-  const getAllProducts = async() => {
+  const getAllProducts = async () => {
     await fetch(listAllProductsAPI, {
       method: 'GET',
       headers: {
@@ -42,6 +41,23 @@ const useGetProducts = () => {
     setIsLoading(false);
   };
 
+  const deleteProduct = async (id) => {
+    setIsLoading(true);
+    await fetch(`${createNewProductAPI}/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    })
+      .then(async (response) => {
+        await getAllProducts();
+        setIsLoading(false);
+        //console.log(response);
+      });
+  };
+
   const newProduct = () => {
     setIsLoading(true);
     setSelectedProduct();
@@ -50,7 +66,8 @@ const useGetProducts = () => {
   };
 
   const createProduct = async (data) => {
-    console.log(data);
+    setIsLoading(true);
+    //console.log(data);
     await fetch(createNewProductAPI, {
       method: 'POST',
       headers: {
@@ -62,11 +79,33 @@ const useGetProducts = () => {
     })
       .then(async (res) => await res.json())
       .then(async (response) => {
+        
         await getAllProducts();
         setIsLoading(false);
-        console.log(response);
+        //console.log(response);
       });
-  }
+  };
+
+  const updateProduct = async (id, data) => {
+    setIsLoading(true);
+    //console.log(data);
+    await fetch(`${createNewProductAPI}/${id}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify(data),
+    })
+      .then(async (res) => await res.json())
+      .then(async (response) => {
+        
+        await getAllProducts();
+        setIsLoading(false);
+        //console.log(response);
+      });
+  };
 
   return {
     products,
@@ -76,6 +115,8 @@ const useGetProducts = () => {
     selectedProduct,
     isEditProduct,
     createProduct,
+    deleteProduct,
+    updateProduct,
   };
 };
 

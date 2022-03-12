@@ -58,6 +58,9 @@ const ProductsList = () => {
                           title=""
                           className="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral"
                           data-original-title="Remove Product"
+                          onClick={async () =>
+                            await state.productsState.deleteProduct(product.id)
+                          }
                         >
                           <i className="now-ui-icons ui-1_simple-remove"></i>
                         </button>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import useGetProducts from '@hooks/useGetProducts';
+import useCategories from '@hooks/useCategories';
 
 const initialState = {
   cart: [],
@@ -7,12 +8,12 @@ const initialState = {
 
 const useInitialState = () => {
   const productsState = useGetProducts();
-  const [state, setState] = useState({ initialState, productsState });
+  const categoriesState = useCategories();
+  const [state, setState] = useState({ initialState, productsState, categoriesState });
+  //console.log(state);
 
   useEffect(() => {
-    if (!productsState.isLoading) {
-      updateProductsState(productsState);
-    }
+    updateProductsState(productsState);
   }, [
     productsState.isLoading,
     productsState.products,
@@ -20,9 +21,23 @@ const useInitialState = () => {
     productsState.selectedProduct,
   ]);
 
+  useEffect(() => {
+    updateCategoriesState(categoriesState);
+  }, [
+    categoriesState.isLoading,
+    categoriesState.categories,
+  ]);
+
+  const updateCategoriesState = (payload) => {
+    setState({
+      ...state,
+      categoriesState: payload
+    });
+  };
+
   const updateProductsState = (payload) => {
     setState({
-      ...initialState,
+      ...state,
       productsState: payload,
     });
   };

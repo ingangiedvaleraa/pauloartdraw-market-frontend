@@ -36,7 +36,7 @@ const SaveProduct = () => {
               <div className="card-body">
                 <form action="/" ref={form}>
                   <div className="row">
-                    <div className="col-md-5 pr-1">
+                    <div className="col-md-6 pr-1">
                       <div className="form-group">
                         <label>Nombre</label>
                         <input
@@ -47,13 +47,25 @@ const SaveProduct = () => {
                         />
                       </div>
                     </div>
-                    <div className="col-md-3 px-1">
+                    <div className="col-md-4 px-1">
+                        <label htmlFor='category'>Categoría</label>
                       <div className="form-group">
-                        <label>Categoría</label>
+                        <select name='category'>
+                        {state.categoriesState.categories.map((category) => (
+                            <option value={category.id} key={category.id}>{category.name}</option>
+                        ))}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-4 pr-1">
+                      <div className="form-group">
+                        <label>Stock</label>
                         <input
-                          type="text"
+                          type="number"
                           className="form-control"
-                          name="category"
+                          name="stock"
                           defaultValue="1"
                         />
                       </div>
@@ -68,28 +80,13 @@ const SaveProduct = () => {
                         />
                       </div>
                     </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-6 pr-1">
+                    <div className="col-md-3 pl-1">
+                      <label>Estado</label>
                       <div className="form-group">
-                        <label>Stock</label>
-                        <input
-                          type="number"
-                          className="form-control"
-                          name="stock"
-                          defaultValue="1"
-                        />
-                      </div>
-                    </div>
-                    <div className="col-md-6 pl-1">
-                      <div className="form-group">
-                        <label>Estado</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="state"
-                          defaultValue="Activo"
-                        />
+                        <label className="switch">
+                          <input type="checkbox" name="state" />
+                          <span className="slider round"></span>
+                        </label>
                       </div>
                     </div>
                   </div>
